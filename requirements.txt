@@ -1,0 +1,6 @@
+django
+djangorestframework
+django-filter
+requests
+psycopg2
+pillow
