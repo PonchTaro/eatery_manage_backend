@@ -137,3 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # material iconのURL
 ICON_URL = 'https://material.io/resources/icons/'
+# サイトのURL
+HOST_URL = 'http://localhost:8000/'

@@ -4,3 +4,4 @@ django-filter
 requests
 psycopg2
 pillow
+qrcode

@@ -59,12 +59,14 @@ class Product(ModelBase):
 
 
 class Table(ModelBase):
+    class Meta:
+        ordering = ['number']
     class Status(models.IntegerChoices):
         AVAILABLE = 0, _('空き')
         RESERVED = 1, _('予約')
         USING = 2, _('使用中')
     eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
-    number = models.CharField(max_length=128, unique=True)
+    number = models.PositiveIntegerField(unique=True)
     accomodation = models.PositiveIntegerField()
     start_using_at = models.DateTimeField(verbose_name='使用開始時間', blank=True, null=True)
     status = models.IntegerField(
@@ -101,7 +103,7 @@ class Invoice(ModelBase):
         verbose_name = verbose_name_plural = '請求'
     # TODO: 精算をする際にはTableが使用開始になった時間以降にcreateされた請求を集めてきて商品の合計金額を計算する
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product)
+    products = models.ManyToManyField(Product, blank=True)
 
     @property
     def total_price(self):

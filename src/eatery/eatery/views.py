@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
+from django.http import FileResponse
 from rest_framework.response import Response
 from rest_framework import status
 from eatery.eatery.models import (
@@ -42,14 +43,22 @@ class TableViewSet(ModelViewSet):
     @action(detail=True, methods=["POST"])
     def use(self, request, pk=None):
         instance = self.get_object()
-        instance.occupy()
-        return self.retrieve(request, pk)
+        serializer = TableSerializer(instance)
+        serializer.occupy()
+        return FileResponse(
+            serializer.context['code'],
+            content_type='image/png',
+            filename='invoice({}).png'.format(
+                serializer.context['invoice_id']
+            )
+        )
 
     @action(detail=True, methods=["POST"])
     def free(self, request, pk=None):
         instance = self.get_object()
         instance.free()
         return self.retrieve(request, pk)
+
 
 
 class ProductViewSet(ModelViewSet):
