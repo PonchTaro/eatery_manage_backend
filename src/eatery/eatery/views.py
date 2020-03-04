@@ -19,32 +19,44 @@ class EateryViewSet(ModelViewSet):
     queryset = Eatery.objects.all()
     serializer_class = EaterySerializer
 
-    @action(detail=True)
+    @action(detail=True, methods=["GET"])
     def products(self, request, pk):
         eatery = self.get_object()
+        data = ProductSerializer(eatery.product_set.all(), many=True).data,
         return Response(
-            ProductSerializer(eatery.product_set.all(), many=True).data,
+            data,
             status=status.HTTP_200_OK
         )
-    
-    @action(detail=True)
+
+    @action(detail=True, methods=["GET"])
     def tables(self, request, pk):
         eatery = self.get_object()
-        return Response(
-            eatery.table_set.values('id', 'number', 'accomodations')
-        )
-    
+        data = TableSerializer(eatery.table_set.all(), many=True).data
+        return Response(data)
+
 
 class TableViewSet(ModelViewSet):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
-    
+
+    @action(detail=True, methods=["POST"])
+    def use(self, request, pk=None):
+        instance = self.get_object()
+        instance.occupy()
+        return self.retrieve(request, pk)
+
+    @action(detail=True, methods=["POST"])
+    def free(self, request, pk=None):
+        instance = self.get_object()
+        instance.free()
+        return self.retrieve(request, pk)
+
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    
+
 class InvoiceViewSet(ModelViewSet):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
-    
+

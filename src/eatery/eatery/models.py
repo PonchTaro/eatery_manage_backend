@@ -27,13 +27,13 @@ class BaseUser(AbstractUser):
 
 class Staff(BaseUser):
     def save(self, **kwargs):
-        instance = super().save(commit=False)   
+        instance = super().save(commit=False)
         instance.user_type = BaseUser.USER_TYPE.STAFF
         return instance.save()
 
 class StoreManger(BaseUser):
     def save(self, **kwargs):
-        instance = super().save(commit=False)   
+        instance = super().save(commit=False)
         instance.user_type = BaseUser.USER_TYPE.STORE_MANAGER
         return instance.save()
 
@@ -66,12 +66,35 @@ class Table(ModelBase):
     eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
     number = models.CharField(max_length=128, unique=True)
     accomodation = models.PositiveIntegerField()
-    start_using_at = models.DateTimeField(verbose_name='使用開始時間')
-    status = models.ImageField(
+    start_using_at = models.DateTimeField(verbose_name='使用開始時間', blank=True, null=True)
+    status = models.IntegerField(
         choices=Status.choices,
         default=Status.AVAILABLE
     )
-    
+    @property
+    def is_available(self):
+        return self.status == Table.Status.AVAILABLE
+
+    @property
+    def is_reserved(self):
+        return self.status == Table.Status.RESERVED
+
+    @property
+    def is_using(self):
+        return self.status == Table.Status.USING
+
+    def occupy(self):
+        self.status = Table.Status.USING
+        self.save()
+
+    def reserve(self):
+        self.status = Table.Status.RESERVED
+        self.save()
+
+    def free(self):
+        self.status = Table.Status.AVAILABLE
+        self.save()
+
 
 class Invoice(ModelBase):
     class Meta:

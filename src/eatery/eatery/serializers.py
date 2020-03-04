@@ -13,11 +13,21 @@ class EaterySerializer(ModelSerializer):
         fields = '__all__'
         depth = 1
 
+
 class TableSerializer(ModelSerializer):
     class Meta:
         model = Table
-        fields = '__all__'
-        depth = 1
+        fields = [
+            'id',
+            'eatery',
+            'number',
+            'accomodation',
+            'start_using_at',
+            'status',
+            'is_available',
+            'is_reserved',
+            'is_using',
+        ]
 
 
 class CreateBillSerializer(ModelSerializer):
@@ -40,6 +50,7 @@ class CreateBillSerializer(ModelSerializer):
 class InvoiceQRIssueSerialier(ModelSerializer):
     class Meta:
         model = Invoice
+
     def issue_invoice_qr(self):
         # invoiceのURLを取ってきてQRコードを作成
         pass
@@ -49,6 +60,7 @@ class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
         fields = [
+            'id',
             'eatery',
             'name',
             'price',
