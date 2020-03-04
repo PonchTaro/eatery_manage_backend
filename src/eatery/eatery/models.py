@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F, Sum
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
@@ -103,12 +104,20 @@ class Invoice(ModelBase):
         verbose_name = verbose_name_plural = '請求'
     # TODO: 精算をする際にはTableが使用開始になった時間以降にcreateされた請求を集めてきて商品の合計金額を計算する
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    products = models.ManyToManyField(Product, blank=True)
+    products = models.ManyToManyField(Product, through='Order', blank=True)
 
     @property
     def total_price(self):
         '''紐づく商品の合計金額を返す'''
-        pass
+        return self.order_set.annotate(
+            subtotal=F('product__price') * F('number')
+        ).aggregate(sum=Sum('subtotal'))['sum']
+
+
+class Order(ModelBase):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE)
+    number = models.PositiveIntegerField(verbose_name="注文数", default=1)
 
 
 class Reservation(ModelBase):

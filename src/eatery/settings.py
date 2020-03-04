@@ -137,5 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # material iconのURL
 ICON_URL = 'https://material.io/resources/icons/'
-# サイトのURL
-HOST_URL = 'http://localhost:8000/'
+# 客固有のURL(注文の際に使う)(隣の客が使えないようにする仕組みどうする？？)
+TOP_URL = 'http://192.168.254.113:4200/me-new/{eatery_id}/{invoice_id}/'
