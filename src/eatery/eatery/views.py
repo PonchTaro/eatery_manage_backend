@@ -24,9 +24,17 @@ class EateryViewSet(ModelViewSet):
 
     @action(detail=True, methods=["GET"])
     def products(self, request, pk):
-        eatery = self.get_object()
+        instance = self.get_object()
         return Response(
-            ProductSerializer(eatery.product_set.all(), many=True).data,
+            ProductSerializer(instance.product_set.all(), many=True).data,
+            status=status.HTTP_200_OK
+        )
+
+    @action(detail=True, methods=["GET"])
+    def categories(self, request, pk):
+        instance = self.get_object()
+        return Response(
+            ProductCategorySerializer(instance.productcategory_set.all(), many=True).data,
             status=status.HTTP_200_OK
         )
 

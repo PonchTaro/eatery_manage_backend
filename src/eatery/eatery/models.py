@@ -57,6 +57,8 @@ class Eatery(ModelBase):
 
 
 class ProductCategory(ModelBase):
+    class Meta:
+        unique_together = ['eatery', 'ordering']
     name = models.CharField(max_length=256)
     eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
     ordering = models.PositiveIntegerField()
@@ -74,7 +76,7 @@ class Product(ModelBase):
     category = models.ForeignKey(ProductCategory, on_delete=models.PROTECT)
     # フロントエンドで管理するのがめんどいのでアイコンのURLはsettings.pyのICON_URL参照
     icon = models.CharField(max_length=128)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, null=True)
 
 
 class Table(ModelBase):

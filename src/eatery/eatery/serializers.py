@@ -18,7 +18,20 @@ from eatery.eatery.models import (
 class EaterySerializer(ModelSerializer):
     class Meta:
         model = Eatery
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'address',
+            'site_url',
+            'tel',
+            'tel2',
+            'product_set',
+            'table_set',
+        ]
+        extra_kwargs = {
+            'product_set': {'read_only': True},
+            'table_set': {'read_only': True},
+        }
 
 
 class TableSerializer(ModelSerializer):
@@ -82,7 +95,17 @@ class CreateBillSerializer(ModelSerializer):
 class ProductCategorySerializer(ModelSerializer):
     class Meta:
         model = ProductCategory
-        exclude = ['enabled']
+        fields = [
+            'id',
+            'name',
+            'eatery',
+            'ordering'
+        ]
+
+    def to_representation(self, obj):
+        data = super().to_representation(obj)
+        data['eatery'] = EaterySerializer(obj.eatery).data
+        return data
 
 
 class ProductSerializer(ModelSerializer):
@@ -101,6 +124,7 @@ class ProductSerializer(ModelSerializer):
     def to_representation(self, obj):
         data = super().to_representation(obj)
         data['category'] = {
+            'id': obj.category.id,
             'name': obj.category.name,
             'ordering': obj.category.ordering
         }
