@@ -5,15 +5,17 @@ from rest_framework import status
 from eatery.eatery.models import (
     Table,
     Product,
-    Invoice,
+    Voucher,
     Eatery,
+    ProductCategory,
 )
 from eatery.eatery.serializers import (
     TableSerializer,
     ProductSerializer,
-    InvoiceSerializer,
+    VoucherSerializer,
     EaterySerializer,
     OrderSerializer,
+    ProductCategorySerializer,
 )
 
 class EateryViewSet(ModelViewSet):
@@ -39,15 +41,25 @@ class TableViewSet(ModelViewSet):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
 
-    @action(detail=True, methods=["POST"])
-    def use(self, request, pk=None):
+    @action(detail=True, methods=["GET"], url_path='issue-code')
+    def issue_code(self, request, pk=None):
         instance = self.get_object()
         serializer = TableSerializer(instance)
-        serializer.occupy()
-        return Response(
-            serializer.context,
-            status=status.HTTP_200_OK
-        )
+        data = serializer.issue_code()
+        data['number'] = instance.number
+        return Response(data, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["POST"])
+    def occupy(self, request, pk=None):
+        instance = self.get_object()
+        if instance.is_available:
+            serializer = TableSerializer(instance)
+            serializer.occupy()
+            return Response(
+                serializer.context,
+                status=status.HTTP_200_OK
+            )
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=["POST"])
     def free(self, request, pk=None):
@@ -56,6 +68,9 @@ class TableViewSet(ModelViewSet):
         return self.retrieve(request, pk)
 
 
+class ProductCategoryViewSet(ModelViewSet):
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
 
 # 管理画面で使う
 class ProductViewSet(ModelViewSet):
@@ -63,9 +78,9 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
 
 
-class InvoiceViewSet(ModelViewSet):
-    queryset = Invoice.objects.all()
-    serializer_class = InvoiceSerializer
+class VoucherViewSet(ModelViewSet):
+    queryset = Voucher.objects.all()
+    serializer_class = VoucherSerializer
 
     @action(detail=True, methods=["GET"])
     def table(self, request, pk=None):
@@ -87,7 +102,7 @@ class InvoiceViewSet(ModelViewSet):
     @action(detail=True, methods=["POST"], url_path='add-product')
     def add_product(self, request, pk=None):
         instance = self.get_object()
-        serializer = InvoiceSerializer(instance)
+        serializer = VoucherSerializer(instance)
         ordered_products = serializer.add_product(**request.data)
         return Response(
             ProductSerializer(ordered_products, many=True).data,

@@ -9,16 +9,16 @@ from rest_framework.serializers import ModelSerializer
 from eatery.eatery.models import (
     Table,
     Product,
-    Invoice,
+    Voucher,
     Eatery,
     Order,
+    ProductCategory,
 )
 
 class EaterySerializer(ModelSerializer):
     class Meta:
         model = Eatery
         fields = '__all__'
-        depth = 1
 
 
 class TableSerializer(ModelSerializer):
@@ -37,10 +37,8 @@ class TableSerializer(ModelSerializer):
         ]
 
     @staticmethod
-    def create_code_string(data):
-        '''
-        QRコードを生成する
-        '''
+    def _create_code_string(data):
+        '''dataからQRコードを生成するメソッド'''
         code = qrcode.make(data)
         # TODO:(検討)生成したQRコードの画像をmediaに保存した後基礎情報を保存
         output_stream = BytesIO()
@@ -49,41 +47,42 @@ class TableSerializer(ModelSerializer):
         raw_data = output_stream.getvalue()
         return base64.b64encode(raw_data)
 
+    def issue_code(self):
+        '''テーブルのURLのQRコードを発行'''
+        visit_url = path.join(
+            settings.VISIT_URL.format(
+                eatery_id=self.instance.eatery.id,
+                table_id=self.instance.id
+            ),
+        )
+        data = {}
+        data['code'] = self._create_code_string(visit_url)
+        data['type'] = 'image/png'
+        return data 
+
     def occupy(self):
         self.instance.occupy()
         # 請求書のオブジェクトを作成
-        invoice = Invoice.objects.create(table=self.instance)
-        invoice_url = path.join(
-            settings.TOP_URL.format(
-                eatery_id=self.instance.eatery.id,
-                invoice_id=invoice.id
-            ),
-        )
-        # 請求書のIDを埋め込んだURLをQRコード化
-        self.context['code'] = self.create_code_string(invoice_url)
-        self.context['type'] = 'image/png'
-        self.context['invoice_id'] = invoice.id
+        voucher = Voucher.objects.create(table=self.instance)
+        self.context['voucher_id'] = voucher.id
         return self.instance
 
 
 class CreateBillSerializer(ModelSerializer):
     # 合計金額を確認する際などはこれを利用
     class Meta:
-        model = Invoice
+        model = Voucher
         fields = []
 
     def create_bill(self):
         # self.instanceはセットされている
         return self.instance.products.aggregate()
 
-class InvoiceQRIssueSerialier(ModelSerializer):
-    class Meta:
-        model = Invoice
-        fields = []
 
-    def issue_invoice_qr(self):
-        # invoiceのURLを取ってきてQRコードを作成
-        pass
+class ProductCategorySerializer(ModelSerializer):
+    class Meta:
+        model = ProductCategory
+        exclude = ['enabled']
 
 
 class ProductSerializer(ModelSerializer):
@@ -99,6 +98,14 @@ class ProductSerializer(ModelSerializer):
             'image',
         ]
 
+    def to_representation(self, obj):
+        data = super().to_representation(obj)
+        data['category'] = {
+            'name': obj.category.name,
+            'ordering': obj.category.ordering
+        }
+        return data
+
 
 class OrderSerializer(ModelSerializer):
     product = ProductSerializer()
@@ -107,15 +114,16 @@ class OrderSerializer(ModelSerializer):
         fields = [
             'id',
             'product',
-            'invoice',
+            'voucher',
             'number',
+            'status',
         ]
 
 
-class InvoiceSerializer(ModelSerializer):
+class VoucherSerializer(ModelSerializer):
     # 作成だけでよいのでは
     class Meta:
-        model = Invoice
+        model = Voucher
         fields = '__all__'
         depth = 1
 
@@ -123,5 +131,5 @@ class InvoiceSerializer(ModelSerializer):
         product = Product.objects.filter(id=product).first()
         if product is None:
             raise NotFound('注文された商品が存在しません')
-        Order.objects.create(product=product, invoice=self.instance, number=number)
+        Order.objects.create(product=product, voucher=self.instance, number=number)
         return self.instance.products.all()
