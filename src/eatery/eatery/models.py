@@ -82,12 +82,13 @@ class Product(ModelBase):
 class Table(ModelBase):
     class Meta:
         ordering = ['number']
+        unique_together = ['eatery', 'number']
     class Status(models.IntegerChoices):
         AVAILABLE = 0, _('空き')
         RESERVED = 1, _('予約')
         USING = 2, _('使用中')
     eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
-    number = models.PositiveIntegerField(unique=True)
+    number = models.PositiveIntegerField()
     accomodation = models.PositiveIntegerField()
     start_using_at = models.DateTimeField(verbose_name='使用開始時間', blank=True, null=True)
     status = models.IntegerField(

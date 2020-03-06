@@ -44,6 +44,15 @@ class EateryViewSet(ModelViewSet):
         data = TableSerializer(eatery.table_set.all(), many=True).data
         return Response(data)
 
+    @action(detail=True, methods=["GET"], url_path='received-orders')
+    def received_orders(self, request, pk):
+        instance = self.get_object()
+        pending_vouchers = Voucher.objects.filter(
+            table__eatery=instance,
+            status=Voucher.Status.PENDING
+        )
+        return Response()
+
 
 class TableViewSet(ModelViewSet):
     queryset = Table.objects.all()
@@ -67,7 +76,8 @@ class TableViewSet(ModelViewSet):
                 serializer.context,
                 status=status.HTTP_200_OK
             )
-        return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        newest_voucher = instance.voucher_set.order_by('-created').first()
+        return Response({'voucher_id': newest_voucher.id}, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=True, methods=["POST"])
     def free(self, request, pk=None):
