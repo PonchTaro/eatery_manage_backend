@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'eatery',
         'USER': 'develop',
-        'PASSWORD': 'neko3daisuki',
+        'PASSWORD': 'test',
         'HOST': 'localhost',
         'PORT': '15432',
     },
@@ -138,4 +138,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # material iconのURL
 ICON_URL = 'https://material.io/resources/icons/'
 # 客固有のURL(注文の際に使う)(隣の客が使えないようにする仕組みどうする？？)
-VISIT_URL = 'http://192.168.254.113:4200/me-new/{eatery_id}/visit/{table_id}/'
+VISIT_URL = 'http://192.168.100.105:4200/me-new/{eatery_id}/visit/{table_id}/'
