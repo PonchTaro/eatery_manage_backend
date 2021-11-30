@@ -7,6 +7,9 @@
 初期段階だけ作ったが、その後盛り上がらずやり切らずに終わってしまったアプリ
 フロントエンドは[ここ](https://github.com/shigekato/eatery_manage_frontend)
 
+## ER図
+* https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.p
+
 ## 反省
 このときは途中で力尽きてしまったが、もう少しUX, UIも考えて作り込めば楽しかったかも。
 
