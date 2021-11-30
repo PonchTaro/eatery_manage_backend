@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.conf import settings
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from eatery.eatery.models import (
+from eatery_app.models import (
     Table,
     Product,
     Voucher,

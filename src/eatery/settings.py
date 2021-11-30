@@ -31,14 +31,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'eatery_app',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'eatery.eatery',
 ]
 
 MIDDLEWARE = [
@@ -92,7 +92,8 @@ DATABASES = {
     },
 }
 
-AUTH_USER_MODEL = 'eatery.BaseUser'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+AUTH_USER_MODEL = 'eatery_app.BaseUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -138,4 +139,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # material iconのURL
 ICON_URL = 'https://material.io/resources/icons/'
 # 客固有のURL(注文の際に使う)(隣の客が使えないようにする仕組みどうする？？)
-VISIT_URL = 'http://192.168.100.105:4200/me-new/{eatery_id}/visit/{table_id}/'
+HOST = '192.168.3.1'
+VISIT_URL = 'http://%s:4200/me-new/{eatery_id}/visit/{table_id}/' % HOST

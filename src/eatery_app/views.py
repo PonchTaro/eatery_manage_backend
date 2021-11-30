@@ -2,14 +2,14 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from eatery.eatery.models import (
+from eatery_app.models import (
     Table,
     Product,
     Voucher,
     Eatery,
     ProductCategory,
 )
-from eatery.eatery.serializers import (
+from eatery_app.serializers import (
     TableSerializer,
     ProductSerializer,
     VoucherSerializer,
@@ -19,6 +19,8 @@ from eatery.eatery.serializers import (
 )
 
 class EateryViewSet(ModelViewSet):
+    '''
+    '''
     queryset = Eatery.objects.all()
     serializer_class = EaterySerializer
 

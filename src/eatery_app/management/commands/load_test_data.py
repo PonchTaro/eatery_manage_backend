@@ -1,6 +1,6 @@
 from random import randint
 from django.core.management.base import BaseCommand, CommandError
-from eatery.eatery.models import (
+from eatery_app.models import (
     Eatery, Table, Product, Order, ProductCategory, Voucher
 )
 
