@@ -15,15 +15,16 @@
 * メニュー一覧から商品を選んで注文をしていく。
 * 注文履歴が見れる。
 * 離席する際に会計する。(未実装)paypayでやろうと最近思った。
+* ![image](https://user-images.githubusercontent.com/31150623/144202578-bf917325-35de-4aa1-9abd-e38c1148e23b.png)
+
 
 #### 店
 * 注文できる品物を登録する。
 * 注文できる品物の種類を登録する(品物をグループ分けして表示するため)
 * テーブルの情報を登録する。(椅子の数など)
 * テーブルに紐づくQRコードの発行
-
-## イメージ
-![image](https://user-images.githubusercontent.com/31150623/142143710-36b5a78e-2c9b-43a7-9f41-c28f710301b2.png)
+![image](https://user-images.githubusercontent.com/31150623/144202622-13952876-0eb9-4aaa-aff9-2b80fa1ec890.png)
+![image](https://user-images.githubusercontent.com/31150623/144202697-98ce2e15-3b35-474c-b175-c89dc5c24146.png)
 
 ## Discussion
 * 開発を始めてから愛着もなくやめてしまった。もう少しUX, UIも考えて作り込めば楽しんで開発にのめり込めたかもしれない。
