@@ -7,7 +7,7 @@
 初期段階だけ作ったが、その後盛り上がらずやり切らずに終わってしまったアプリ
 フロントエンドは[ここ](https://github.com/shigekato/eatery_manage_frontend)
 
-## ER図
+## (エセ)ER図
 ![image](https://user-images.githubusercontent.com/31150623/144195308-db72baae-b38e-4960-adf8-4a6d3adf3762.png)
 * https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.g104f691ba8c_0_0
 
