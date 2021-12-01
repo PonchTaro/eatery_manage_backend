@@ -8,7 +8,8 @@
 フロントエンドは[ここ](https://github.com/shigekato/eatery_manage_frontend)
 
 ## ER図
-* https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.p
+![image](https://user-images.githubusercontent.com/31150623/144195308-db72baae-b38e-4960-adf8-4a6d3adf3762.png)
+* https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.g104f691ba8c_0_0
 
 ## 反省
 このときは途中で力尽きてしまったが、もう少しUX, UIも考えて作り込めば楽しかったかも。
