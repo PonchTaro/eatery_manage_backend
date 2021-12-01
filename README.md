@@ -15,7 +15,7 @@
 * メニュー一覧から商品を選んで注文をしていく。
 * 注文履歴が見れる。
 * 離席する際に会計する。(未実装)paypayでやろうと最近思った。
-![image](https://user-images.githubusercontent.com/31150623/144202578-bf917325-35de-4aa1-9abd-e38c1148e23b.png)
+![image](https://user-images.githubusercontent.com/31150623/144207833-a9226e03-e526-4936-aaa2-d0d6601706cc.png)
 
 
 #### 店
