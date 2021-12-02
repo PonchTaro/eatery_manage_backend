@@ -140,4 +140,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ICON_URL = 'https://material.io/resources/icons/'
 # 客固有のURL(注文の際に使う)(隣の客が使えないようにする仕組みどうする？？)
 HOST = '192.168.3.1'
-VISIT_URL = 'http://%s:4200/me-new/{eatery_id}/visit/{table_id}/' % HOST
+VISIT_URL = 'http://%s:4200/fast-mng/{eatery_id}/visit/{table_id}/' % HOST

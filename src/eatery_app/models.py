@@ -61,6 +61,7 @@ class ProductCategory(ModelBase):
         unique_together = ['eatery', 'ordering']
     name = models.CharField(max_length=256)
     eatery = models.ForeignKey(Eatery, on_delete=models.CASCADE)
+    # NOTE: orderingはなんのためのフィールド？
     ordering = models.PositiveIntegerField()
 
     def __str__(self):
@@ -68,6 +69,7 @@ class ProductCategory(ModelBase):
 
 
 class Product(ModelBase):
+    # TODO: スタッフが「品切れ」などの状態も管理できるようになると便利？
     class Meta:
         ordering = ['category__ordering']
     name = models.CharField('商品名', max_length=512)
@@ -179,4 +181,5 @@ class Reservation(ModelBase):
 
 
 class Usage(ModelBase):
+    # FIXME: 使い方は全ての店舗で一貫しているので、フロントエンドでページを作成する。
     pass

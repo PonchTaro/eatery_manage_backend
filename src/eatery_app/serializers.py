@@ -60,7 +60,7 @@ class TableSerializer(ModelSerializer):
         raw_data = output_stream.getvalue()
         return base64.b64encode(raw_data)
 
-    def issue_code(self):
+    def issue_code(self, data):
         '''テーブルのURLのQRコードを発行'''
         visit_url = path.join(
             settings.VISIT_URL.format(
@@ -68,12 +68,12 @@ class TableSerializer(ModelSerializer):
                 table_id=self.instance.id
             ),
         )
-        data = {}
         data['code'] = self._create_code_string(visit_url)
         data['type'] = 'image/png'
         return data 
 
     def occupy(self):
+        '''テーブルを着席状態に書き換え & 請求書オブジェクトの作成'''
         self.instance.occupy()
         # 請求書のオブジェクトを作成
         voucher = Voucher.objects.create(table=self.instance)
