@@ -1,7 +1,11 @@
-## Description
+## 導入
+* 飲食店での人件費削減のために、お客様が持っている携帯端末を用いて注文を取るモバイルオーダーシステムはしばしば存在する。
+* 自社ブランドを重視する飲食チェーンなどは自社向けにアプリを発注するだろう。例えば、マクドナルドやスターバックスなどだ。
+* しかし、ブランディングを重視せず、人件費削減のためにとりあえず手軽にモバイルオーダーを導入したい飲食店の経営者も少なからず存在するそうである(聞き取り調査の結果)。
+* そこで、そんな飲食店ごとに店舗で扱う品物などの情報を入力すれば簡単にモバイルオーダーが行えるようになるシステムの構想を打ち立てた。
+
+##### 追加の説明
 * 名前の由来は、フランス語のMoNGe(食べる)と英語のMaNaGe(管理する)を掛けて、FastにMNGするアプリという意味を込めた。
-* 飲食店を始める際に、客自身にモバイル端末で注文してもらうシステムが手軽に導入できると喜ぶ人もいるかと思った。
-* 新しい店舗を始める際のスタッフを募集する手間の削減, 営業中の人件費の削減を目的とする。
 * フロントエンドは[ここ](https://github.com/shigekato/eatery_manage_frontend)
 
 ## (エセ)ER図
@@ -30,4 +34,7 @@
 ## Discussion
 * 開発を始めてから愛着もなくやめてしまった。もう少しUX, UIも考えて作り込めば楽しんで開発にのめり込めたかもしれない。
 * 「ひとつの店舗で飯を食うためにアプリをインストールするのは面倒」という発想を前提にしてwebアプリで開発しているが、これは正しいだろうか？
-
+* 既存の例が既に多数存在する。
+    * [LINE ミニアプリ](https://line-marketplace.com/jp/ebook/mini-app/miniapp-start-guide/order?utm_source=google&utm_medium=cpc&utm_campaign=kwm_ma_search&gclid=Cj0KCQiA15yNBhDTARIsAGnwe0UKBnIdYaoQej3fPa22ijnkn-TaS4GAn_ZeIKjWUfK8C-opi0hNu_oaAnSIEALw_wcB)
+    * [Retty Order](https://lp.self-order.retty.me/?utm_source=google&utm_source=google&utm_medium=cpc&utm_medium=cpc&utm_campaign=mo&utm_campaign=mo&gclid=Cj0KCQiA15yNBhDTARIsAGnwe0UY6Hypc_3z9Lsemj5LBp_iJB8eKn3tw5C1vFT8YWJZTBey0GowGsIaAv9fEALw_wcB)
+    * [Tap & Order](https://tap-n-order.com/lp/lp-2021003/?gclid=Cj0KCQiA15yNBhDTARIsAGnwe0U56uWCJMPIYhzjmoc_zn1YX7vgDHGuNXbpvRgZJ2coXGtMd8dlTKgaAlRaEALw_wcB)
