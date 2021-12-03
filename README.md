@@ -31,6 +31,17 @@
 ![image](https://user-images.githubusercontent.com/31150623/144625849-a8c65c9d-bf2d-4321-9795-1bb14f514ecf.png)
 ![image](https://user-images.githubusercontent.com/31150623/144202697-98ce2e15-3b35-474c-b175-c89dc5c24146.png)
 
+### システムフロー
+##### 着席 -> QRコード読み取り -> 商品一覧ページ
+![image](https://user-images.githubusercontent.com/31150623/144632319-df0e347a-a334-44bd-950a-2e513271c750.png)
+
+##### 商品選択 -> 注文
+
+##### 注文履歴の一覧
+
+##### 決済(未実装)
+* https://developer.paypay.ne.jp/
+
 ## Discussion
 * 開発を始めてから愛着もなくやめてしまった。もう少しUX, UIも考えて作り込めば楽しんで開発にのめり込めたかもしれない。
 * 「ひとつの店舗で飯を食うためにアプリをインストールするのは面倒」という発想を前提にしてwebアプリで開発しているが、これは正しいだろうか？
