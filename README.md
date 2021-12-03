@@ -10,7 +10,7 @@
 
 ## (エセ)ER図
 ![image](https://user-images.githubusercontent.com/31150623/144195308-db72baae-b38e-4960-adf8-4a6d3adf3762.png)
-* [googleスライド](https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.g104f691ba8c_0_0)
+* [googleスライド](https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.g104f691ba8c_0_0)(私用)
 * [ソースコード](https://github.com/shigekato/FastMNG_backend/blob/master/src/eatery_app/models.py)
 
 ## 機能
