@@ -8,6 +8,17 @@
 * 名前の由来は、フランス語のMoNGe(食べる)と英語のMaNaGe(管理する)を掛けて、FastにMNGするアプリという意味を込めた。
 * フロントエンドは[ここ](https://github.com/shigekato/eatery_manage_frontend)
 
+### システムフロー
+##### 着席 -> QRコード読み取り -> 商品一覧ページ
+![image](https://user-images.githubusercontent.com/31150623/144632319-df0e347a-a334-44bd-950a-2e513271c750.png)
+
+##### 商品選択 -> 注文
+
+##### 注文履歴の一覧
+
+##### 決済(未実装)
+* https://developer.paypay.ne.jp/
+
 ## (エセ)ER図
 ![image](https://user-images.githubusercontent.com/31150623/144195308-db72baae-b38e-4960-adf8-4a6d3adf3762.png)
 * [googleスライド](https://docs.google.com/presentation/d/1WaU-hbif61SbpiykjSl37folaw7ukwc7WVLN4TJ2Lsk/edit#slide=id.g104f691ba8c_0_0)(私用)
@@ -30,17 +41,6 @@
 * テーブルに紐づくQRコードの発行
 ![image](https://user-images.githubusercontent.com/31150623/144625849-a8c65c9d-bf2d-4321-9795-1bb14f514ecf.png)
 ![image](https://user-images.githubusercontent.com/31150623/144202697-98ce2e15-3b35-474c-b175-c89dc5c24146.png)
-
-### システムフロー
-##### 着席 -> QRコード読み取り -> 商品一覧ページ
-![image](https://user-images.githubusercontent.com/31150623/144632319-df0e347a-a334-44bd-950a-2e513271c750.png)
-
-##### 商品選択 -> 注文
-
-##### 注文履歴の一覧
-
-##### 決済(未実装)
-* https://developer.paypay.ne.jp/
 
 ## Discussion
 * 開発を始めてから愛着もなくやめてしまった。もう少しUX, UIも考えて作り込めば楽しんで開発にのめり込めたかもしれない。
